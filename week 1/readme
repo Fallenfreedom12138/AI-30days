@@ -1,0 +1,31 @@
+# AI 30 天工程冲刺
+
+## 项目简介
+30 天从零基础到用 AI 完成项目的学习记录。
+
+## 当前进度
+- [x] Week 1：Python 基础 + LLM API 调用
+- [ ] Week 2：Prompt + RAG
+- [ ] Week 3：Agent + 工具调用
+- [ ] Week 4：部署 + 作品集
+
+## Week 1 成果
+- `week1/day3.py`：JSON 读写 + 环境变量管理
+- `week1/day4.py`：第一次调用 LLM API
+- `week1/day5.py`：多轮对话
+- `week1/day6.py`：错误处理 + 命令行工具 + 对话日志
+- `week1/day7： 写readme
+
+## 技术栈
+- Python 3.10
+- OpenAI SDK（兼容阿里云百炼）
+- python-dotenv
+
+## 运行方式
+1. 克隆仓库
+2. `pip install -r requirements.txt`
+3. 创建 `.env`，写入 API Key、BASE_URL、MODEL_NAME
+4. `python week1/day6.py`
+
+## 学习计划
+详见 [30 天计划](#)

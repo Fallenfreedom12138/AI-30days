@@ -37,7 +37,9 @@ while True:
 
     messages.append({"role":"assistant","content":reply})
     print(f"多多:{reply}")
-    with open('chat_log.txt','a',encoding="utf-8") as f:
+    log_path=os.path.join(os.path.dirname(__file__), "chat_log.txt")
+
+    with open(log_path, 'a', encoding="utf-8") as f:
         f.write(f'用户：{user_input}\n')
         f.write(f'多多：{reply}\n\n')
     print(f'token消耗：{response.usage.total_tokens}')

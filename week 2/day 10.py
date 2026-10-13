@@ -1,30 +1,33 @@
 import os
 os.environ["HF_ENDPOINT"] = "https://hf-mirror.com"
 
+import faiss
+import numpy as np
 from sentence_transformers import SentenceTransformer
-from sentence_transformers import util
 
 model = SentenceTransformer("BAAI/bge-base-zh-v1.5")
 
 texts = [
      "客单价下降",
-    "每位顾客平均消费减少",
+    "产品价格下降",
     "今天天气很好"
 ]
 embeddings = model.encode(texts)
-print(embeddings.shape)# (3, 512)
+print(embeddings.shape)# (3, 768)
 
-query = "耐克销售下降"
-query_embedding = model.encode(query)
+vectors=np.array(embeddings).astype("float32")
+dimension=vectors.shape[1]
 
-similarities = util.cos_sim(query_embedding, embeddings)
+index=faiss.IndexFlatL2(dimension)
+index.add(vectors)
 
-scores=util.cos_sim(embeddings,embeddings)
-print(f'{scores}')
+query = "客人消费下降"
+query_embedding = model.encode(query).astype('float32').reshape(1,-1)
 
-for i in range(len(texts)):
-    for j in range(i+1,len(texts)):
-        print(f'{texts[i]} vs {texts[j]}:{scores[i][j]:.4f}')
+distances, indices = index.search(query_embedding, k=3)
 
-
-print(similarities)
+print(f'\nquery:{query}\n')
+for i, idx in enumerate(indices[0]):
+    print(f'第{i+1}相似:{texts[idx]}')
+    print(f'距离：{distances[0][i]:.4f}')
+    print()

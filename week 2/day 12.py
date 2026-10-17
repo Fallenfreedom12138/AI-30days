@@ -72,6 +72,8 @@ index=faiss.IndexFlatL2(dimension)
 index.add(vectors)
 print(f'索引建立完成，共{index.ntotal}个向量\n')
 
+
+
 #第六步 检索
 print("="*60)
 print("第六步:检索测试")
